@@ -19,17 +19,23 @@ public class DataAnalysisApplication {
 	
 	public static void main(String[] args) {
 		Assignment8 assignment = new Assignment8();
+		CompletableFuture<List<Integer>> completableListTemp = new CompletableFuture<List<Integer>>();
+		List<Integer> finishList = new ArrayList<Integer>();
 		
 		
 		CompletableFuture<List<Integer>> completableList = new CompletableFuture<List<Integer>>();
 		ExecutorService pool = Executors.newCachedThreadPool();
 
-		for (int i=0; i < 10; i++) {
+		for (int i=0; i < 1000; i++) {
 			completableList = CompletableFuture.supplyAsync(() -> assignment.getNumbers(), pool);
-			
+			//completableListTemp.add(completableList);
+	
 		}
-		List<Integer> finishList = new ArrayList<Integer>();
+		
+
+		
 		finishList = completableList.join();
+		//finishList.addAll(completableList);
 		
 
 
@@ -41,6 +47,7 @@ public class DataAnalysisApplication {
 			System.out.print(entry.getKey() + "=" + entry.getValue() + ", ");
 			
 		}
+
 		
 	
 	}
